@@ -4,13 +4,7 @@ var qwitterBypassed = false;
 const loading_bar_width = 300;
 const loading_time = 1000 * 10;
 const increment = loading_time / loading_bar_width;
-
-
-// cover whole page with qwitter loading screen
-const dv = document.createElement("div");
-dv.id = "qwitter-block";
-body = document.querySelector("body");
-body.appendChild(dv);
+var quotes = [];
 
 disableScroll();
 
@@ -18,11 +12,18 @@ disableScroll();
 fetch(chrome.runtime.getURL('scripts/quotes.json'))
     .then((resp) => resp.json())
     .then(function (jsonData) {
-        startTimer(jsonData.quotes);
+        quotes = jsonData.quotes;
+        startTimer();
     });
 
 // start timer after loading the quotes
-function startTimer(quotes) {
+function startTimer() {
+    // cover whole page with qwitter loading screen
+    const dv = document.createElement("div");
+    dv.id = "qwitter-block";
+    body = document.querySelector("body");
+    body.appendChild(dv);
+
     // select a random quote
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
@@ -62,6 +63,10 @@ function moveBar(loading, i) {
     else {
         i++;
         window.scrollTo(0, 0);
+        if (document.querySelector("#qwitter-block") == null) {
+            alert("Nice try!");
+            startTimer();
+        }
         loading.style.width = i + "px";
         setTimeout(moveBar.bind(null, loading, i), increment);
     }
