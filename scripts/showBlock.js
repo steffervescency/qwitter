@@ -11,6 +11,8 @@ dv.id = "qwitter-block";
 body = document.querySelector("body");
 body.appendChild(dv);
 
+disableScroll();
+
 // get all quotes
 fetch(chrome.runtime.getURL('scripts/quotes.json'))
     .then((resp) => resp.json())
@@ -58,6 +60,7 @@ function moveBar(loading, i) {
     }
     else {
         i++;
+        window.scrollTo(0, 0);
         loading.style.width = i + "%";
         setTimeout(moveBar.bind(null, loading, i), increment);
     }
@@ -78,7 +81,10 @@ function addButtons() {
     const continueBtn = document.createElement("button");
     continueBtn.id = "qwitter-continue-btn";
     continueBtn.innerHTML = "Continue to Twitter";
-    continueBtn.addEventListener("click", function() { dv.remove(); });
+    continueBtn.addEventListener("click", function() {
+        dv.remove();
+        enableScroll();
+    });
 
     btnDiv.appendChild(quitBtn);
     btnDiv.appendChild(continueBtn);
@@ -97,5 +103,6 @@ function refresh_icon() {
 }
 
 setTimeout(refresh_icon, 50);
+
 
 
