@@ -5,6 +5,7 @@ const loading_bar_width = 300;
 const loading_time = 1000 * 10;
 const increment = loading_time / loading_bar_width;
 var quotes = [];
+var dv = null;
 
 disableScroll();
 
@@ -19,7 +20,7 @@ fetch(chrome.runtime.getURL('scripts/quotes.json'))
 // start timer after loading the quotes
 function startTimer() {
     // cover whole page with qwitter loading screen
-    const dv = document.createElement("div");
+    dv = document.createElement("div");
     dv.id = "qwitter-block";
     body = document.querySelector("body");
     body.appendChild(dv);
@@ -66,6 +67,7 @@ function moveBar(loading, i) {
         if (document.querySelector("#qwitter-block") == null) {
             alert("Nice try!");
             startTimer();
+            return;
         }
         loading.style.width = i + "px";
         setTimeout(moveBar.bind(null, loading, i), increment);
