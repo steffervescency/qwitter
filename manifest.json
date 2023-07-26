@@ -17,5 +17,9 @@
   "web_accessible_resources": [{
     "resources": ["scripts/quotes.json"],
     "matches": ["<all_urls>"]
-  }]
+  }],
+  "icons": {
+    "48" : "img/icon48.png",
+    "128": "img/icon128.png"
+  }
 }

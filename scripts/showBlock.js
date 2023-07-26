@@ -7,6 +7,10 @@ const increment = loading_time / loading_bar_width;
 var quotes = [];
 var dv = null;
 
+const header = document.createElement('header');
+header.innerHTML = `ℚ`
+
+
 disableScroll();
 
 // get all quotes
@@ -19,11 +23,14 @@ fetch(chrome.runtime.getURL('scripts/quotes.json'))
 
 // start timer after loading the quotes
 function startTimer() {
+
     // cover whole page with qwitter loading screen
     dv = document.createElement("div");
     dv.id = "qwitter-block";
     body = document.querySelector("body");
     body.appendChild(dv);
+
+    dv.appendChild(header);
 
     // select a random quote
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
@@ -31,7 +38,7 @@ function startTimer() {
     // add the quote to the page
     const quoteText = document.createElement("div");
     quoteText.id = "qwitter-quote-text";
-    quoteText.innerHTML = '"' + randomQuote.quote + '"';
+    quoteText.innerHTML = '<q>' + randomQuote.quote + '</q>';
 
     const quoteAuthor = document.createElement("div");
     quoteAuthor.id = "qwitter-quote-author";
@@ -104,7 +111,7 @@ function refresh_icon() {
     if (qwitterBypassed) {
         return;
     }
-    document.title = "Twitter";
+    document.title = "ℚwitter";
     var link = document.querySelector("link[rel~='icon']");
     link.href = favicon;
     setTimeout(refresh_icon, 50);
@@ -114,3 +121,5 @@ setTimeout(refresh_icon, 50);
 
 
 
+
+    

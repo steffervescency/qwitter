@@ -1,25 +1,27 @@
 #qwitter-block {
 	z-index: 9999999999999999;
-	position: absolute;
+	position: fixed;
 	left: 0px;
 	top: 0px;
 	height: 100%;
 	width: 100%;
-	background-color: #39454d;
+	background-color: #333;
 }
 
 #qwitter-progress-bar {
   width: 300px;
-  background-color: #AAAAAA;
-  border: 1px solid white;
+  background-color: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 8px;
   margin:auto;
-  margin-top: 40px;
+  margin-top: 56px;
+  overflow: hidden;
 }
 
 #qwitter-progress {
   width: 1%;
-  height: 20px;
-  background-color: #444444;
+  height: 12px;
+  background-color: #4285f4;
 }
 
 #qwitter-quote-text {
@@ -29,7 +31,7 @@
 	text-align: center;
 	padding-left: 10%;
 	padding-right: 10%;
-	padding-top: 10%;
+	padding-top: 14%;
 }
 
 #qwitter-quote-author {
@@ -63,8 +65,19 @@
 	font-size: 1em;
 	padding: 5px;
 	margin-top: 20px;
-	background-color: #4f616e;
-	color: #272e33;
+	background-color: #555;
+	color: #222;
 	border: none;
 
+}
+
+
+#qwitter-block header{
+	width:100%;
+	height:56px;
+	display:flex;
+	align-items:center;
+	color: white;
+	font-size:25px;
+	padding: 0 16px;
 }
