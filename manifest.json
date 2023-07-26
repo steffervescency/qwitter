@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Qwitter",
+  "version": "0.3",
+  "description": "Are you sure you want to disable this?",
+  "content_scripts": [
+     {
+      "js": ["scripts/showBlock.js"],
+      "css": ["css/style.css"],
+      "matches": [
+        "https://*.twitter.com/",
+        "https://*.twitter.com/home"
+      ]
+     }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["scripts/quotes.json"],
+    "matches": ["<all_urls>"]
+  }]
+}
