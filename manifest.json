@@ -5,7 +5,8 @@
   "description": "Are you sure you want to disable this?",
   "content_scripts": [
      {
-      "js": ["scripts/showBlock.js"],
+      "js": ["scripts/disableScroll.js",
+          "scripts/showBlock.js"],
       "css": ["css/style.css"],
       "matches": [
         "https://*.twitter.com/",
