@@ -2,6 +2,7 @@ const favicon = "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAA
 var qwitterBypassed = false;
 
 var site_name = "Twitter";
+var old_title = "";
 
 const loading_time = 1000 * 10;
 const loading_bar_width = 300;
@@ -22,6 +23,11 @@ fetch(chrome.runtime.getURL('scripts/quotes.json'))
 
 // start timer after loading the quotes
 function startTimer() {
+
+    var old_title = document.title;
+    qwitterBypassed = false;
+    setTimeout(refresh_icon, 50);
+
 
     disableScroll();
 
@@ -70,9 +76,10 @@ function moveBar(loading, i) {
         addButtons();
     }
     else {
-        i++;
-        if (document.querySelector("#qwitter-block") == null) {
-            alert("Nice try!");
+        if (document.hasFocus()) {
+            i++;
+        }
+        if (i % 10 == 0 && document.querySelector("#qwitter-block") == null) {
             startTimer();
             return;
         }
@@ -100,13 +107,24 @@ function addButtons() {
         dv.remove();
         enableScroll();
         qwitterBypassed = true;
-        setTimeout(startTimer, 1000 * 60 * 1);
+        setTimeout(interruptionTimer.bind(null, 1000 * 60 * 1));
     });
 
     btnDiv.appendChild(quitBtn);
     btnDiv.appendChild(continueBtn);
 
     dv.appendChild(btnDiv);
+}
+
+function interruptionTimer(time) {
+    if (time <= 0) {
+        startTimer();
+        return;
+    }
+    if (document.hasFocus()) {
+        time = time - 1000;
+    }
+    setTimeout(interruptionTimer.bind(null, time), 1000);
 }
 
 function refresh_icon() {
@@ -120,10 +138,3 @@ function refresh_icon() {
     setTimeout(refresh_icon, 50);
 }
 
-var old_title = document.title;
-setTimeout(refresh_icon, 50);
-
-
-
-
-    
