@@ -17,7 +17,14 @@ header.innerHTML = `ℚ`
 fetch(chrome.runtime.getURL('scripts/quotes.json'))
     .then((resp) => resp.json())
     .then(function (jsonData) {
-        quotes = jsonData.quotes;
+        const d = new Date();
+        const hour = d.getHours();
+        if(hour >= 22 || hour < 7) {
+            quotes = jsonData.sleepy_quotes;
+        }
+        else {
+            quotes = jsonData.quotes;
+        }
         startTimer();
     });
 
